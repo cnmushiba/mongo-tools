@@ -40,6 +40,7 @@ const (
 	// - aarch64: RHEL/Amazon/SUSE
 	// - arm64: Debian/Ubuntu
 	ArchAarch64 Arch = "aarch64"
+	ArchLoongarch64 Arch = "loongarch64"
 	ArchS390x   Arch = "s390x"
 	ArchPpc64le Arch = "ppc64le"
 	ArchX86_64  Arch = "x86_64"
@@ -187,6 +188,8 @@ func (p Platform) DebianArch() string {
 		return "amd64"
 	case ArchPpc64le:
 		return "ppc64el"
+	case ArchLoongarch64:
+		return "loongarch64"
 	// other archs are the same name on Debian.
 	default:
 		return p.Arch.String()
@@ -312,6 +315,8 @@ func (a Arch) ConstName() string {
 		return "ArchArm64"
 	case ArchAarch64:
 		return "ArchAarch64"
+	case ArchLoongarch64:
+		return "ArchLoongarch64"
 	case ArchS390x:
 		return "ArchS390x"
 	case ArchPpc64le:
@@ -577,6 +582,14 @@ var platforms = []Platform{
 		Pkg:       PkgDeb,
 		Repos:     []Repo{RepoEnterprise, RepoOrg},
 		BuildTags: []string{"failpoints", "ssl"},
+	},
+	{
+		Name:      "ubuntu1804",
+		Arch:      ArchLoongarch64,
+		OS:        OSLinux,
+		Pkg:       PkgDeb,
+		Repos:     []Repo{RepoEnterprise, RepoOrg},
+		BuildTags: defaultBuildTags,
 	},
 	{
 		Name:      "ubuntu2004",
